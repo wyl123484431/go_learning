@@ -39,20 +39,3 @@ func TestTraveMap(t *testing.T)  {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
