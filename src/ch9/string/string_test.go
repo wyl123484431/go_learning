@@ -17,3 +17,11 @@ func TestSting(t *testing.T)  {
 	t.Logf("中 unicode %x", c[0])  //4e2d
 	t.Logf("中 UTF8 %x", s)        //e4 b8 ad      三个字节
 }
+
+func TestStringToRune(t *testing.T)  {
+	s := "中华人民共和国"
+	for _,c:=range s{
+		t.Logf("%[2]c %[1]x",c,c)  //
+	}
+
+}
