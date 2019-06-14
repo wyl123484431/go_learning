@@ -1,8 +1,11 @@
 package encapsulation
 
-import "testing"
+import (
+	"testing"
+	"fmt"
+)
 
-type Employee struct {  // 结构体
+type Employee struct {  // 结构体  封装数据
 	Id string
 	Name string
 	Age int
@@ -21,5 +24,19 @@ func TestCreateEmployeeObj(t *testing.T)  {
 	t.Log(e2)   // &{2 Rose 22} *指针类型
 	t.Logf("e is %T",e)   // %T 是类型   &e   为指针类型
 	t.Logf("e2 is %T",e2)  //e2 is *encapsulation.Employee   *指针类型
+}
 
+
+func (e Employee) string() string  {  // 在实例被调用的时，实例成员会进行复制
+	return fmt.Sprintf("ID:%s-Name:%s-Age:%d",e.Id,e.Name,e.Age)
+}
+
+
+/*func (e *Employee) string() string  {  // 避免内存拷贝  指针
+	return fmt.Sprintf("ID:%s-Name:%s-Age:%d",e.Id,e.Name,e.Age)
+}*/
+
+func TestStructOperations(t *testing.T)  {
+	e := &Employee{"0","Bob",20}
+	t.Log(e.string())
 }
