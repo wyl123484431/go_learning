@@ -3,9 +3,10 @@ package encapsulation
 import (
 	"testing"
 	"fmt"
+	"unsafe"
 )
 
-type Employee struct {  // 结构体  封装数据
+type Employee struct {  // 结构体  封装数据  struct 实例
 	Id string
 	Name string
 	Age int
@@ -28,15 +29,18 @@ func TestCreateEmployeeObj(t *testing.T)  {
 
 
 func (e Employee) string() string  {  // 在实例被调用的时，实例成员会进行复制
+	fmt.Printf("Address is %x", unsafe.Pointer(&e.Name))
 	return fmt.Sprintf("ID:%s-Name:%s-Age:%d",e.Id,e.Name,e.Age)
 }
 
 
-/*func (e *Employee) string() string  {  // 避免内存拷贝  指针
+/*func (e *Employee) string() string  {  // 避免内存拷贝  指针  避免开销
+	fmt.Printf("Address is %x", unsafe.Pointer(&e.Name))
 	return fmt.Sprintf("ID:%s-Name:%s-Age:%d",e.Id,e.Name,e.Age)
 }*/
 
 func TestStructOperations(t *testing.T)  {
 	e := &Employee{"0","Bob",20}
+	fmt.Printf("Address is %x\n",unsafe.Pointer(&e.Name))    // 打印地址值
 	t.Log(e.string())
 }
